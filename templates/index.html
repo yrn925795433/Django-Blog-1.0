@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+    <h1>欢迎访问本网站</h1>
+<ul>
+{% for k in my_dict.items %}
+    <li style="color:{{forloop.counter|divisibleby:'2'|yesno:'red,blue'}}">
+        {{forloop.counter}}{{k}}</li>
+    {% endfor %}}
+</ul>
+</body>
+</html>

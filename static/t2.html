@@ -1,0 +1,97 @@
+<html>
+
+<head>
+    <title>test page</title>
+    <meta charset="utf-8">
+    <style type="text/css">
+    table,td{
+        border:black solid 1px;
+
+    }
+    table{
+        border-collapse: collapse;
+        width : 100%
+    }
+    td{
+        padding: 5px;
+    }
+    </style>
+    <script src="jquery.js"></script>
+    <script type="text/javascript">
+    $(function(){
+        $('#main').css('color','red');
+        $('button').click(function(){
+            $(this).hide();
+            console.log($('#main').attr('id'))
+        });
+        var trs = $('.detail tr');
+        // console.log(tds);
+        trs.each(function (index, domEle) { 
+        // domEle == this 
+        $(domEle).css("backgroundColor", index%2?"yellow":'red');  
+  }); 
+        console.log()
+        $('#ajaxget').click(function(){
+        $.get('http://127.0.0.1:8000/user/show?id=123',{'name':'tom'},function(data){
+            console.log(data)
+            console.log(data.status)
+
+        });
+    });
+
+
+
+        $('#ajaxpost').click(function(){
+        $.post('http://127.0.0.1:8000/user/show?id=123',{'name':'tom'},function(data){
+            console.log(data)
+            console.log(data.status)
+
+        });
+    });
+
+        $('#ajax').click(function(){
+            $.ajax({
+            type: "POST",
+            url: 'http://127.0.0.1:8000/user/show?id=123',
+            // data: "name=John&location=Boston",
+            data:{name:"john",age:20},
+            contentType:"application/json",
+            success: function(data){
+                console.log(data);
+            }
+            });
+
+        })
+
+
+
+
+    })
+
+    
+    </script>
+</head>
+
+<body>
+<div id='main'>
+    test text
+</div>
+<hr>
+<button>test click</button>
+<table class='detail'>
+    <tr>
+        <td>1</td>
+        <td>test1</td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <td>test2</td>
+    </tr>
+</table>
+<hr>
+<button id='ajaxget'>ajax get</button>
+<button id='ajaxpost'>ajax post</button>
+<button id='ajax'>ajax json</button>
+</body>
+
+</html>
